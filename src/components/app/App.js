@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { MainPage, ComicsPage } from '../pages';
+import { MainPage, ComicsPage, Page404, SingleComicPage } from '../pages';
 import AppHeader from "../appHeader/AppHeader";
 
 const App = () => {
@@ -10,14 +10,12 @@ const App = () => {
             <div className="app">
                 <AppHeader />
                 <main>
-                    <Switch>
-                        <Route exact path="/marvel-db/">
-                            <MainPage />
-                        </Route>
-                        <Route exact path="/marvel-db/comics">
-                            <ComicsPage />
-                        </Route>
-                    </Switch>
+                    <Routes>
+                        <Route path="/marvel-db/" element={<MainPage />} />
+                        <Route path="/marvel-db/comics" element={<ComicsPage />} />
+                        <Route path="/marvel-db/comics/:comicId" element={<SingleComicPage />} />
+                        <Route path="*" element={<Page404 />} />
+                    </Routes>
                 </main>
             </div>
         </Router>
